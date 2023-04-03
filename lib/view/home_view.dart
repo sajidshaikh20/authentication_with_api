@@ -19,19 +19,15 @@ class _HomeviewState extends State<Homeview> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          TextButton(
-              onPressed: () async {
-                final SharedPreferences? prefs = await _prefs;
-                prefs?.clear();
-                Get.offAll(Authscreen());
-              },
-              child: Text(
-                'logout',
-                style: TextStyle(color: Colors.white),
-              ))
-        ],
-      ),
+          backgroundColor: Color.fromARGB(255, 35, 104, 223),
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () async {
+              final SharedPreferences? prefs = await _prefs;
+              prefs?.clear();
+              Get.offAll(Authscreen());
+            },
+          )),
       body: Center(child: Text("Home screen")),
     );
   }

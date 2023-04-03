@@ -16,15 +16,16 @@ class InputTextFieldWidget extends StatelessWidget {
       height: 46,
       child: TextField(
         controller: textEditingController,
+        style: TextStyle(color: Colors.white, fontSize: 20),
         decoration: InputDecoration(
             alignLabelWithHint: true,
             focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black)),
-            fillColor: Colors.white54,
+                borderSide: BorderSide(color: Colors.white)),
+            fillColor: Colors.white70,
             hintText: hintText,
             hintStyle: const TextStyle(color: Colors.grey),
             contentPadding: EdgeInsets.only(bottom: 15),
-            focusColor: Colors.white60),
+            focusColor: Colors.white),
       ),
     );
   }

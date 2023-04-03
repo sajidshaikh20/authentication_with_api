@@ -23,62 +23,83 @@ class _AuthscreenState extends State<Authscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.blueAccent,
         body: SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(36),
-        child: Center(
-          child: Obx(
-            () => Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  child: Text(
-                    "Welcome",
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
+          child: Padding(
+            padding: EdgeInsets.all(36),
+            child: Center(
+              child: Obx(
+                () => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    MaterialButton(
-                      onPressed: () {
-                        color:
-                        !isLogin.value ? Colors.white : Colors.amber;
-                        isLogin.value = false;
-                      },
-                      child: Text("Register"),
+                    SizedBox(
+                      height: 80,
                     ),
-                    MaterialButton(
-                      onPressed: () {
-                        color:
-                        !isLogin.value ? Colors.black : Colors.brown;
-                        isLogin.value = true;
-                      },
-                      child: Text("Login"),
+                    Row(
+                      children: [
+                        Container(
+                          child: Text(
+                            "Welcome,",
+                            style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "to Sign",
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        )
+                      ],
                     ),
+                    Text(
+                      "in continue",
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MaterialButton(
+                          height: 60,
+                          onPressed: () {
+                            color:
+                            !isLogin.value ? Colors.white : Colors.amber;
+                            isLogin.value = false;
+                          },
+                          child: Text(
+                            "Register",
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                          ),
+                        ),
+                        MaterialButton(
+                          onPressed: () {
+                            color:
+                            !isLogin.value ? Colors.black : Colors.brown;
+                            isLogin.value = true;
+                          },
+                          child: Text("Login",
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 80,
+                    ),
+                    isLogin.value ? loginWidget() : registerWidget()
                   ],
                 ),
-                SizedBox(
-                  height: 80,
-                ),
-                isLogin.value ? loginWidget() : registerWidget()
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Widget registerWidget() {
@@ -99,8 +120,16 @@ class _AuthscreenState extends State<Authscreen> {
           height: 20,
         ),
         SubmitButton(
-            onPressed: () => registerationController.registerWithEmail(),
-            title: 'Register')
+          onPressed: () => registerationController.registerWithEmail(),
+          title: 'Register',
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          "Forgot you password ?",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }
@@ -116,7 +145,7 @@ class _AuthscreenState extends State<Authscreen> {
           hintText: 'email address',
         ),
         SizedBox(
-          height: 20,
+          height: 30,
         ),
         InputTextFieldWidget(
             textEditingController: loginController.passwordController,
@@ -125,7 +154,14 @@ class _AuthscreenState extends State<Authscreen> {
           height: 20,
         ),
         SubmitButton(
-            onPressed: () => loginController.loginwithEmail(), title: 'login ')
+            onPressed: () => loginController.loginwithEmail(), title: 'login '),
+        SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Forgot you password ?",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }
