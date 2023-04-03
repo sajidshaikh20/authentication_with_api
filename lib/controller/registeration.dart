@@ -7,21 +7,23 @@ import 'package:nauggets_assessment/constant/urls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class SignupController extends GetxController {
+class RegisterationController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  Future<void> signUpWithEmail() async {
+  Future<void> registerWithEmail() async {
     try {
-      // var headers = {'Content-Type': 'application/json'};
+      var headers = {'Content-Type': 'application/json'};
       var url = Uri.parse(Api.registerurl);
       Map body = {
         'email': emailController.text,
-        'password': passwordController.text.trim(),
+        'password': passwordController.text,
       };
-      http.Response response = await http.post(url, body: jsonEncode(body));
+      http.Response response =
+          await http.post(url, body: jsonEncode(body), headers: headers);
+      log(response.statusCode.toString());
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         var token = json['token'];
@@ -31,7 +33,7 @@ class SignupController extends GetxController {
         emailController.clear();
         passwordController.clear();
       } else {
-        throw jsonDecode(response.body)["Message"] ?? "Unknown Erroe Occured";
+        throw jsonDecode(response.body)["Message"] ?? "Unknown Error Occured";
       }
     } catch (e) {
       Get.back();

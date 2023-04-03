@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nauggets_assessment/constant/urls.dart';
+import 'package:nauggets_assessment/view/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,13 +16,15 @@ class LoginController extends GetxController {
 
   Future<void> loginwithEmail() async {
     try {
-      // var headers = {'Content-Type': 'application/json'};
+      var headers = {'Content-Type': 'application/json'};
       var url = Uri.parse(Api.loginurl);
       Map body = {
-        'email': emailController.text.trim(),
+        'email': emailController.text,
         'password': passwordController.text,
       };
-      http.Response response = await http.post(url, body: jsonEncode(body));
+      http.Response response =
+          await http.post(url, body: jsonEncode(body), headers: headers);
+      log(response.body);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         var token = json['token'];
@@ -30,8 +33,11 @@ class LoginController extends GetxController {
         await pref?.setString('token', token);
         emailController.clear();
         passwordController.clear();
+        Get.off(Homeview());
+        Get.snackbar("Login", "Login successfully",
+            snackPosition: SnackPosition.BOTTOM);
       } else {
-        throw jsonDecode(response.body)["Message"] ?? "Unknown Erroe Occured";
+        throw jsonDecode(response.body)["Message"] ?? "Invalid Credentials ";
       }
     } catch (e) {
       Get.back();
