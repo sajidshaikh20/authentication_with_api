@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nauggets_assessment/bindings/Initial_binding.dart';
+import 'package:nauggets_assessment/routes/splash_routs.dart';
 import 'package:nauggets_assessment/view/home_view.dart';
 import 'package:nauggets_assessment/view/login_signup.dart';
 
 void main() {
+  InitialBinding().dependencies();
   runApp(const MyApp());
 }
 
@@ -18,6 +21,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Authscreen());
+        getPages: SplashRouts.routes());
   }
 }
