@@ -8,18 +8,16 @@ import 'package:nauggets_assessment/controller/login_controller.dart';
 
 import '../controller/registeration.dart';
 
-class Authscreen extends StatefulWidget {
-  const Authscreen({super.key});
+class Authscreen extends StatelessWidget {
+  Authscreen({super.key});
 
-  @override
-  State<Authscreen> createState() => _AuthscreenState();
-}
-
-class _AuthscreenState extends State<Authscreen> {
   RegisterationController registerationController =
       Get.put(RegisterationController());
+
   LoginController loginController = Get.put(LoginController());
+
   var isLogin = false.obs;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
